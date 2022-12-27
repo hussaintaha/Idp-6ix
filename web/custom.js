@@ -1,0 +1,2 @@
+// JSON
+const vartiable = "VAR";

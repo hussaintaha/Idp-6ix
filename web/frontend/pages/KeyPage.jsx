@@ -44,6 +44,13 @@ const KeyPage = () => {
         setBtnloading(false);
     };
 
+    const handleAddScript = async() => {
+
+        const response = await fetch("/api/script/create")
+        .then(response => response.json());
+
+    };
+
     return (
         <>
             <div>
@@ -63,7 +70,7 @@ const KeyPage = () => {
                                         autoComplete="off"
                                     />
                                     <br />
-                                    <Button onClick={handleSubmit} loading={btnloading} primary>Save Key</Button>
+                                    <Button onClick={handleSubmit} loading={btnloading} primary>Save Key</Button> <Button onClick={handleAddScript}>Enable App</Button>
                                 </div>
                             </Card>
                         </Layout.Section>
