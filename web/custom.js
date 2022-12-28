@@ -14,12 +14,15 @@ function injectScript(src, idpKey) {
 }
 
 function getKeyFunction() {
-    fetch('https://test-store-2022-22.myshopify.com/apps/6ix-app/api/idpkey/fetch').then(function (response) {
+
+    let shopName = window.top.Shopify.shop;
+
+    fetch(`https://${shopName}/apps/6ix-app/api/idpkey/fetch`).then(function (response) {
         return response.json();
     })
         .then((data) => {
 
-            let idpKey = data.data[0].idpkey;
+            let idpKey = data.data.idpkey;
 
             injectScript('https://idp.6ix.com/s/lib.js', idpKey)
                 .then(() => {

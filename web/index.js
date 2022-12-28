@@ -82,8 +82,12 @@ app.get("/api/products/create", async (_req, res) => {
 app.get("/api/idpkey/get", async (req, res) => {
 
   try {
+
+    const session = res.locals.shopify.session;
     
-    const getKey = await KeyModel.find();
+    const getKey = await KeyModel.findOne({
+      "shop": session.shop
+    });
     
     res.status(200).send({ status: 'success', data: getKey });
     
@@ -147,7 +151,7 @@ app.get("/api/script/create", async (req, res) => {
     let hostName = `https://${req.headers.host}/api/script/storefront/?shop=${session.shop}`;
 
     // https://test-store-2022-22.myshopify.com/admin/api/2022-10/script_tags.json
-    // const response = await shopify.api.rest.ScriptTag.delete({ session, id: 192817692880 });
+    // const response = await shopify.api.rest.ScriptTag.delete({ session, id: 192819495120 });
 
     if (getAllScripts.length === 0) {
 
@@ -208,7 +212,13 @@ function applyNonAuthPublicEndpoints(app) {
 
     try {
 
-      const getKey = await KeyModel.find();
+      const session = {
+        shop: 'test-store-2022-22.myshopify.com'
+      };
+
+      const getKey = await KeyModel.findOne({
+        "shop": session.shop
+      });
 
       res.status(200).send({ status: 'success', data: getKey });
       

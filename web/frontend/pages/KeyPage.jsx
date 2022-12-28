@@ -6,23 +6,30 @@ const KeyPage = () => {
 
     const fetch = useAuthenticatedFetch();
     const [active, setActive] = useState(false);
+    const [activeNew, setActiveNew] = useState(false);
     const [value, setValue] = useState('');
     const [btnloading, setBtnloading] = useState(false);
+    const [btnloadingTwo, setBtnloadingTwo] = useState(false);
 
     const handleChange = useCallback((newValue) => setValue(newValue), []);
     const toggleActive = useCallback(() => setActive((active) => !active), []);
+    const toggleActiveNew = useCallback(() => setActiveNew((activeNew) => !activeNew), []);
 
     useEffect(async() => {
 
         const response = await fetch("/api/idpkey/get")
         .then(response => response.json());
 
-        setValue(response.data[0].idpkey);
+        setValue(response.data.idpkey);
     }, []);
 
     const toastMarkup = active ? (
         <Toast content="Saved Successfully!" onDismiss={toggleActive} />
-      ) : null;
+    ) : null;
+
+    const toastMarkupNew = activeNew ? (
+    <Toast content="Script Added Successfully!" onDismiss={toggleActiveNew} />
+    ) : null;
 
 
     const handleSubmit = async() => {
@@ -46,8 +53,13 @@ const KeyPage = () => {
 
     const handleAddScript = async() => {
 
+        setBtnloadingTwo(true);
+
         const response = await fetch("/api/script/create")
         .then(response => response.json());
+
+        setBtnloadingTwo(false);
+        toggleActiveNew();
     };
 
     return (
@@ -69,13 +81,16 @@ const KeyPage = () => {
                                         autoComplete="off"
                                     />
                                     <br />
-                                    <Button onClick={handleSubmit} loading={btnloading} primary>Save Key</Button> <Button onClick={handleAddScript}>Enable App</Button>
+                                    <Button onClick={handleSubmit} loading={btnloading} primary>Save Key</Button> <Button onClick={handleAddScript} loading={btnloadingTwo} >Enable App</Button>
                                 </div>
                             </Card>
                         </Layout.Section>
                     </Layout>
                     <Frame>
                         {toastMarkup}
+                    </Frame>
+                    <Frame>
+                        {toastMarkupNew}
                     </Frame>
                 </Page>
             </div>
