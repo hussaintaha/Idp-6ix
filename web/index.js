@@ -147,7 +147,7 @@ app.get("/api/script/create", async (req, res) => {
     let hostName = `https://${req.headers.host}/api/script/storefront/?shop=${session.shop}`;
 
     // https://test-store-2022-22.myshopify.com/admin/api/2022-10/script_tags.json
-    // const response = await shopify.api.rest.ScriptTag.delete({ session, id: 192814842064 });
+    // const response = await shopify.api.rest.ScriptTag.delete({ session, id: 192817692880 });
 
     if (getAllScripts.length === 0) {
 
@@ -204,7 +204,7 @@ function applyNonAuthPublicEndpoints(app) {
     }
   });
 
-  app.get("/api/idkkey/fetch", async (req, res) => {
+  app.get("/api/idpkey/fetch", async (req, res) => {
 
     try {
 
