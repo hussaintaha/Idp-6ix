@@ -49,6 +49,18 @@ const KeyPage = () => {
         const response = await fetch("/api/script/create")
         .then(response => response.json());
 
+        const secondResponse = await fetch("/api/idpkey/save", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idpkey: value
+            })
+        })
+        .then(response => response.json());
+
+        console.log('secondResponse', secondResponse);
     };
 
     return (
