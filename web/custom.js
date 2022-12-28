@@ -22,24 +22,8 @@ injectScript('https://idp.6ix.com/s/lib.js', 'js.gxwnc116jvz5sus6vw62us.9o4pokhu
     console.error(error);
 });
 
-
-
-// fetch('https://gses-dev.myshopify.com/apps/moodle-app/api/route/testing', {
-//     method: "POST",
-//     headers: {
-//         "Content-Type": "application/json",  
-//     },
-//     body: JSON.stringify({
-//         customerFirstName  : getFirstName.value,
-//         customerLastName   : getLastName.value,
-//         customerEmail      : getEmail.value,
-//         customerPassword   : getPassword.value,
-//     })
-// })
-// .then(response => response.json());
-
 fetch('https://test-store-2022-22.myshopify.com/apps/6ix-app/api/idkkey/fetch', {
-    method: "POST",
+    method: "GET",
     headers: {
         "Content-Type": "application/json",  
     },

@@ -79,11 +79,11 @@ app.get("/api/products/create", async (_req, res) => {
   res.status(status).send({ success: status === 200, error });
 });
 
-app.get("/api/idpkey/save", async (req, res) => {
+app.get("/api/idpkey/get", async (req, res) => {
 
   try {
     
-    const getKey = await KeyModel.find(); 
+    const getKey = await KeyModel.find();
     
     res.status(200).send({ status: 'success', data: getKey });
     
@@ -204,13 +204,13 @@ function applyNonAuthPublicEndpoints(app) {
     }
   });
 
-  app.post("/api/idkkey/fetch", async (req, res) => {
+  app.get("/api/idkkey/fetch", async (req, res) => {
 
     try {
 
-      console.log("RUNNING PROXYYY", req.body);
+      const getKey = await KeyModel.find();
 
-      res.status(200).send("BIRDS ARE FLYING")
+      res.status(200).send({ status: 'success', data: getKey });
       
     } catch (error) {
       res.status(500).send({ status: 'failed', error: error });

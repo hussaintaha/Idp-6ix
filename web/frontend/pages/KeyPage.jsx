@@ -14,7 +14,7 @@ const KeyPage = () => {
 
     useEffect(async() => {
 
-        const response = await fetch("/api/idpkey/save")
+        const response = await fetch("/api/idpkey/get")
         .then(response => response.json());
 
         setValue(response.data[0].idpkey);
@@ -48,19 +48,6 @@ const KeyPage = () => {
 
         const response = await fetch("/api/script/create")
         .then(response => response.json());
-
-        const secondResponse = await fetch("/api/idpkey/save", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                idpkey: value
-            })
-        })
-        .then(response => response.json());
-
-        console.log('secondResponse', secondResponse);
     };
 
     return (
